@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Problem from '@/components/Problem';
 import Technology from '@/components/Technology';
+import Marquee from '@/components/Marquee';
 import DasScene from '@/components/DasScene';
 import Applications from '@/components/Applications';
 import WhyUs from '@/components/WhyUs';
@@ -16,6 +17,7 @@ export default function Home() {
       <main>
         <Hero />
         <Problem />
+        <Marquee />
         <Technology />
         <DasScene />
         <Applications />

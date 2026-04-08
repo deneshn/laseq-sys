@@ -1,7 +1,26 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+
+function useCounter(target: number, duration = 1800, delay = 900) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setCount(Math.floor(eased * target));
+        if (progress < 1) requestAnimationFrame(tick);
+        else setCount(target);
+      };
+      requestAnimationFrame(tick);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [target, duration, delay]);
+  return count;
+}
 
 function WaveformCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -98,6 +117,18 @@ function WaveformCanvas() {
   );
 }
 
+function StatItem({ target, prefix, suffix, label }: { target: number; prefix: string; suffix: string; label: string }) {
+  const count = useCounter(target);
+  return (
+    <div className="text-center">
+      <p className="text-2xl font-bold text-white tabular-nums">
+        {prefix}{count}{suffix}
+      </p>
+      <p className="text-xs text-slate-500 mt-1">{label}</p>
+    </div>
+  );
+}
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg">
@@ -176,16 +207,9 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-20 grid grid-cols-3 gap-6 max-w-lg mx-auto"
         >
-          {[
-            { value: '100+', label: 'km sensing range' },
-            { value: '<1m', label: 'spatial resolution' },
-            { value: '24/7', label: 'real-time monitoring' },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="text-2xl font-bold text-white">{stat.value}</p>
-              <p className="text-xs text-slate-500 mt-1">{stat.label}</p>
-            </div>
-          ))}
+          <StatItem target={100} prefix="" suffix="+" label="km sensing range" />
+          <StatItem target={1} prefix="<" suffix="m" label="spatial resolution" />
+          <StatItem target={24} prefix="" suffix="/7" label="real-time monitoring" />
         </motion.div>
       </div>
 
