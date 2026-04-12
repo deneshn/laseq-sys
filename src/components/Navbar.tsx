@@ -36,12 +36,12 @@ export default function Navbar() {
         {/* Logo */}
         <a href="#" className="flex items-center group">
           <Image
-            src="/logo.png.png"
+            src="/logo1.png"
             alt="LaseQ Systems"
-            width={120}
-            height={40}
-            className="h-10 w-auto object-contain"
-            style={{ filter: 'drop-shadow(0 0 0 transparent)', mixBlendMode: 'screen', background: 'transparent' }}
+            width={200}
+            height={68}
+            className="h-16 w-auto object-contain"
+            style={{ mixBlendMode: 'normal' }}
             priority
           />
         </a>
