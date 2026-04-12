@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react';
 
 const links = [
   { label: 'Technology', href: '#technology' },
+  { label: 'DLID', href: '#dlid' },
   { label: 'Applications', href: '#applications' },
   { label: 'Why Us', href: '#why-us' },
   { label: 'Team', href: '#team' },
@@ -37,7 +38,7 @@ export default function Navbar() {
             <span className="text-cyan-400 text-xs font-bold tracking-widest">LQ</span>
           </div>
           <span className="text-white font-semibold tracking-tight">
-            LaseQ <span className="text-cyan-400">Comm</span>
+            LaseQ <span className="text-cyan-400">Systems</span>
           </span>
         </a>
 

@@ -1,13 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Cpu, FlaskConical, Globe, ShieldCheck } from 'lucide-react';
+import { Cpu, FlaskConical, Globe, ShieldCheck, Flag } from 'lucide-react';
 
 const differentiators = [
   {
     icon: FlaskConical,
     title: 'Proprietary Interrogation Hardware',
-    body: 'Our interrogator unit achieves phase sensitivity and dynamic range beyond commercially available alternatives — the result of years of photonics R&D.',
+    body: 'Our interrogator unit achieves phase sensitivity and dynamic range beyond commercially available alternatives — engineered from first principles — from laser linewidth and coherence length through to edge AI inference.',
   },
   {
     icon: Cpu,
@@ -17,12 +17,17 @@ const differentiators = [
   {
     icon: Globe,
     title: 'No New Infrastructure Required',
-    body: 'LaseQ Comm works with standard single-mode fiber already in the ground. Deployment is a connection, not a construction project.',
+    body: 'LaseQ Systems works with standard single-mode fiber already in the ground. Deployment is a connection, not a construction project.',
   },
   {
     icon: ShieldCheck,
     title: 'Proven in Harsh Environments',
     body: 'Validated across temperature extremes, high-EMI zones, and subsea conditions — where conventional sensor systems fail.',
+  },
+  {
+    icon: Flag,
+    title: 'Indigenous. Sovereign. Compliant.',
+    body: 'Built in Hyderabad for Indian infrastructure conditions. LaseQ Systems operates entirely at the edge — no foreign cloud dependency, no foreign infrastructure requirement. Designed for IDDM certification and GeM procurement from day one.',
   },
 ];
 
@@ -49,7 +54,7 @@ export default function WhyUs() {
             Our Edge
           </span>
           <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4">
-            Why LaseQ Comm
+            Why LaseQ Systems
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-base">
             DAS is not new. Our technology is. We've rebuilt the stack from the
@@ -58,7 +63,7 @@ export default function WhyUs() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-16">
-          {differentiators.map((d, i) => (
+          {differentiators.slice(0, 4).map((d, i) => (
             <motion.div
               key={d.title}
               initial={{ opacity: 0, y: 40 }}
@@ -76,6 +81,26 @@ export default function WhyUs() {
               </div>
             </motion.div>
           ))}
+
+          {/* 5th card — centered across both columns */}
+          {(() => { const d = differentiators[4]; return (
+            <motion.div
+              key={d.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.48 }}
+              className="md:col-span-2 max-w-lg w-full mx-auto gradient-border rounded-2xl bg-[#061428] p-8 flex gap-6 hover:bg-[#071830] transition-colors"
+            >
+              <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                <d.icon size={22} className="text-cyan-400" />
+              </div>
+              <div>
+                <h3 className="text-white font-semibold text-base mb-2">{d.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{d.body}</p>
+              </div>
+            </motion.div>
+          ); })()}
         </div>
 
         {/* Metrics bar */}

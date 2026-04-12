@@ -51,7 +51,14 @@ const apps = [
       'Enable persistent, wide-area acoustic intelligence across strategic corridors — detecting troop movements, vehicle convoys, and subsurface activity without deploying additional hardware.',
     tag: 'Defense & Intelligence',
     gradient: 'from-blue-500/10 to-cyan-600/5',
-    center: true,
+    center: false,
+  },
+  {
+    title: 'Bio-Sensing',
+    description:
+      'Apply distributed acoustic sensing to biological environments — detecting physiological acoustic signatures, monitoring medical infrastructure, and enabling fiber-based biosensing for healthcare and life sciences research.',
+    tag: 'Life Sciences',
+    gradient: 'from-teal-500/10 to-emerald-600/5',
   },
 ];
 

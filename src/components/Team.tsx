@@ -9,14 +9,7 @@ const founders = [
     role: 'Co-Founder',
     initials: 'SK',
     linkedin: 'https://www.linkedin.com/in/sarveshkumarphd/',
-    bio: 'PhD in Atomic & Molecular Physics (Universidade Nova de Lisboa), Postdoctoral Fellow at Lawrence Berkeley National Laboratory. His expertise in light-matter interaction and precision optical measurement directly underpins LaseQ Comm\'s interrogation hardware. Also leads the company\'s scientific strategy and research partnerships.',
-  },
-  {
-    name: 'Dr Tanwee Das De',
-    role: 'Co-Founder',
-    initials: 'TD',
-    linkedin: 'https://www.linkedin.com/in/tanwee-das-de-29b42b230/',
-    bio: 'PhD in Biotechnology (Delhi Technological University), DST-Inspire Faculty at ICMR-National Institute of Virology. Over 11 years of research experience spanning IISER Pune and the Swedish University of Agricultural Sciences. Drives LaseQ Comm\'s research strategy and scientific partnerships.',
+    bio: 'PhD in Atomic & Molecular Physics (Universidade Nova de Lisboa), Postdoctoral Fellow at Lawrence Berkeley National Laboratory. His expertise in light-matter interaction and precision optical measurement directly underpins LaseQ Systems\'s interrogation hardware. Also leads the company\'s scientific strategy and research partnerships.',
   },
   {
     name: 'Denesh Nallur Narasimman',
@@ -24,6 +17,13 @@ const founders = [
     initials: 'DN',
     linkedin: 'https://www.linkedin.com/in/deneshn',
     bio: 'Hardware engineer and business lead, MEng in Robotics (University of Maryland). Built sensing and perception systems across autonomous vehicles, robotics, and deep-tech R&D. Specialises in taking unsolved hardware problems from first principles to working prototype, while driving commercial strategy and investor relations.',
+  },
+  {
+    name: 'Dr Tanwee Das De',
+    role: 'Non-Executive Director',
+    initials: 'TD',
+    linkedin: 'https://www.linkedin.com/in/tanwee-das-de-29b42b230/',
+    bio: 'PhD in Biotechnology (Delhi Technological University), DST-Inspire Faculty at ICMR-National Institute of Virology. With over 11 years of research experience spanning IISER Pune and the Swedish University of Agricultural Sciences, Tanwee leads LaseQ Systems\'s Bio-Sensing vertical — applying distributed acoustic sensing physics to biological and physiological monitoring applications, including fiber-based biosensing, pathogen acoustic signatures, and medical infrastructure monitoring.',
   },
 ];
 
@@ -118,7 +118,7 @@ export default function Team() {
               <h3 className="text-white font-semibold text-base mb-0.5">Dr Subhadeep De</h3>
               <p className="text-cyan-400 text-xs font-medium tracking-widest uppercase mb-3">Advisor</p>
               <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                Professor at IUCAA, Pune, with a doctorate from the University of Groningen and postdoctoral research at the Joint Quantum Institute, University of Maryland. A precision measurement physicist specialising in ultra-stable narrow-linewidth lasers, photonic quantum sensors, and trapped-ion technologies — expertise that sits at the core of LaseQ Comm's interrogation hardware.
+                Professor at IUCAA, Pune, with a doctorate from the University of Groningen and postdoctoral research at the Joint Quantum Institute, University of Maryland. A precision measurement physicist specialising in ultra-stable narrow-linewidth lasers, photonic quantum sensors, and trapped-ion technologies — expertise that sits at the core of LaseQ Systems's interrogation hardware.
               </p>
               <a
                 href="https://www.linkedin.com/in/subhadeep-de-00718b15"

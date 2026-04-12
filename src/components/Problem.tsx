@@ -78,7 +78,7 @@ export default function Problem() {
             or sense a tremor — automatically?&rdquo;
           </p>
           <span className="block mt-4 text-sm text-cyan-500 font-medium tracking-wide">
-            — The LaseQ Comm Vision
+            — The LaseQ Systems Vision
           </span>
         </motion.blockquote>
       </div>

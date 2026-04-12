@@ -1,26 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-function useCounter(target: number, duration = 1800, delay = 900) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const start = performance.now();
-      const tick = (now: number) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        setCount(Math.floor(eased * target));
-        if (progress < 1) requestAnimationFrame(tick);
-        else setCount(target);
-      };
-      requestAnimationFrame(tick);
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [target, duration, delay]);
-  return count;
-}
 
 function WaveformCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -117,17 +99,6 @@ function WaveformCanvas() {
   );
 }
 
-function StatItem({ target, prefix, suffix, label }: { target: number; prefix: string; suffix: string; label: string }) {
-  const count = useCounter(target);
-  return (
-    <div className="text-center">
-      <p className="text-2xl font-bold text-white tabular-nums">
-        {prefix}{count}{suffix}
-      </p>
-      <p className="text-xs text-slate-500 mt-1">{label}</p>
-    </div>
-  );
-}
 
 export default function Hero() {
   return (
@@ -174,7 +145,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          LaseQ Comm transforms existing fiber optic cables into ultra-sensitive acoustic
+          LaseQ Systems transforms existing fiber optic cables into ultra-sensitive acoustic
           sensing networks — detecting threats, failures, and anomalies across hundreds of
           kilometers in real time.
         </motion.p>
@@ -207,9 +178,18 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-20 grid grid-cols-3 gap-6 max-w-lg mx-auto"
         >
-          <StatItem target={100} prefix="" suffix="+" label="km sensing range" />
-          <StatItem target={1} prefix="<" suffix="m" label="spatial resolution" />
-          <StatItem target={24} prefix="" suffix="/7" label="real-time monitoring" />
+          <div className="text-center">
+            <p className="text-2xl font-bold text-white">100+ km</p>
+            <p className="text-xs text-slate-500 mt-1">sensing range</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold text-white">&lt;1m</p>
+            <p className="text-xs text-slate-500 mt-1">spatial resolution</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold text-white">24/7</p>
+            <p className="text-xs text-slate-500 mt-1">real-time monitoring</p>
+          </div>
         </motion.div>
       </div>
 

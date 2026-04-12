@@ -7,12 +7,12 @@ export default function Footer() {
             <span className="text-cyan-400 text-xs font-bold">LQ</span>
           </div>
           <span className="text-white font-semibold text-sm tracking-tight">
-            LaseQ <span className="text-cyan-400">Comm</span>
+            LaseQ <span className="text-cyan-400">Systems</span>
           </span>
         </div>
 
         <p className="text-slate-500 text-xs text-center">
-          &copy; {new Date().getFullYear()} LaseQ Comm. All rights reserved.
+          &copy; 2026 LaseQ Systems. All rights reserved.
         </p>
 
         <div className="flex gap-6 text-xs text-slate-500">

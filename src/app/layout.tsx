@@ -6,9 +6,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "LaseQ Comm — Distributed Acoustic Sensing",
+  title: "LaseQ Systems — Distributed Sensing Intelligence",
   description:
-    "LaseQ Comm pioneers distributed acoustic sensing technology, turning fiber optic cables into intelligent sensing networks for critical infrastructure.",
+    "LaseQ Systems pioneers distributed acoustic sensing technology, turning fiber optic cables into intelligent sensing networks for critical infrastructure.",
 };
 
 export default function RootLayout({
