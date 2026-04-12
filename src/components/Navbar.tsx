@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 const links = [
   { label: 'Technology', href: '#technology' },
@@ -33,13 +34,16 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
-            <span className="text-cyan-400 text-xs font-bold tracking-widest">LQ</span>
-          </div>
-          <span className="text-white font-semibold tracking-tight">
-            LaseQ <span className="text-cyan-400">Systems</span>
-          </span>
+        <a href="#" className="flex items-center group">
+          <Image
+            src="/logo.png.png"
+            alt="LaseQ Systems"
+            width={120}
+            height={40}
+            className="h-10 w-auto object-contain"
+            style={{ filter: 'drop-shadow(0 0 0 transparent)', mixBlendMode: 'screen', background: 'transparent' }}
+            priority
+          />
         </a>
 
         {/* Desktop links */}

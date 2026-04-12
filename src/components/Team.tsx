@@ -1,31 +1,148 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
+import Image from 'next/image';
 
 const founders = [
   {
     name: 'Dr Sarvesh Kumar',
     role: 'Co-Founder',
     initials: 'SK',
+    photo: '/sarvesh.jpg.jpeg',
     linkedin: 'https://www.linkedin.com/in/sarveshkumarphd/',
-    bio: 'PhD in Atomic & Molecular Physics (Universidade Nova de Lisboa), Postdoctoral Fellow at Lawrence Berkeley National Laboratory. His expertise in light-matter interaction and precision optical measurement directly underpins LaseQ Systems\'s interrogation hardware. Also leads the company\'s scientific strategy and research partnerships.',
+    bio: 'PhD (Universidade NOVA de Lisboa) and former Postdoctoral Fellow at Lawrence Berkeley National Laboratory (LBNL), specializing in ultrafast photonics and precision optical systems. He drives LaseQ Systems\' scientific vision, translating advanced research into scalable sensing and quantum-enabled technologies.',
   },
   {
     name: 'Denesh Nallur Narasimman',
     role: 'Co-Founder',
     initials: 'DN',
+    photo: null,
     linkedin: 'https://www.linkedin.com/in/deneshn',
-    bio: 'Hardware engineer and business lead, MEng in Robotics (University of Maryland). Built sensing and perception systems across autonomous vehicles, robotics, and deep-tech R&D. Specialises in taking unsolved hardware problems from first principles to working prototype, while driving commercial strategy and investor relations.',
+    bio: 'Hardware engineer and business lead, MEng in Robotics (University of Maryland). Specialises in taking unsolved hardware problems from first principles to working prototype, while driving commercial strategy and investor relations.',
   },
   {
     name: 'Dr Tanwee Das De',
     role: 'Non-Executive Director',
     initials: 'TD',
+    photo: null,
     linkedin: 'https://www.linkedin.com/in/tanwee-das-de-29b42b230/',
-    bio: 'PhD in Biotechnology (Delhi Technological University), DST-Inspire Faculty at ICMR-National Institute of Virology. With over 11 years of research experience spanning IISER Pune and the Swedish University of Agricultural Sciences, Tanwee leads LaseQ Systems\'s Bio-Sensing vertical — applying distributed acoustic sensing physics to biological and physiological monitoring applications, including fiber-based biosensing, pathogen acoustic signatures, and medical infrastructure monitoring.',
+    bio: 'DST-Inspire Faculty at ICMR-National Institute of Virology with over 11 years of research experience. Leads LaseQ Systems\' Bio-Sensing vertical — applying distributed acoustic sensing to biological and physiological monitoring applications.',
   },
 ];
+
+const advisors = [
+  {
+    name: 'Dr Subhadeep De',
+    role: 'Advisor',
+    initials: 'SD',
+    photo: null,
+    linkedin: 'https://www.linkedin.com/in/subhadeep-de-00718b15',
+    bio: 'Professor at IUCAA, Pune, with a doctorate from the University of Groningen and postdoctoral research at the Joint Quantum Institute, University of Maryland. Specialises in ultra-stable narrow-linewidth lasers and photonic quantum sensors.',
+  },
+];
+
+type Member = typeof founders[0];
+
+function TeamDisplay({ members }: { members: Member[] }) {
+  const [active, setActive] = useState(0);
+  const person = members[active];
+
+  return (
+    <div className="relative min-h-[520px] flex flex-col">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={active}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+          className="flex flex-col md:flex-row items-stretch flex-1 relative overflow-hidden rounded-2xl bg-[#040e1c] min-h-[480px]"
+        >
+          {/* Left — text */}
+          <div className="relative z-10 flex flex-col justify-center px-10 py-12 md:w-1/2">
+            <p className="text-xs font-medium tracking-widest uppercase text-cyan-400 mb-6">
+              — {person.role}
+            </p>
+            <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
+              {person.name}
+            </h3>
+            <p className="text-slate-400 text-sm leading-relaxed max-w-sm mb-8">
+              {person.bio}
+            </p>
+            <a
+              href={person.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-slate-500 hover:text-cyan-400 transition-colors text-xs w-fit"
+            >
+              <ExternalLink size={13} />
+              LinkedIn
+            </a>
+          </div>
+
+          {/* Right — photo */}
+          <div className="md:w-1/2 relative flex items-end justify-center md:justify-end overflow-hidden">
+            {person.photo ? (
+              <>
+                <Image
+                  src={person.photo}
+                  alt={person.name}
+                  width={500}
+                  height={520}
+                  className="object-cover object-top w-full h-full grayscale opacity-80"
+                  style={{ maxHeight: '520px' }}
+                />
+                {/* Gradient fade from left */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#040e1c] via-[#040e1c]/40 to-transparent" />
+                {/* Gradient fade from bottom */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#040e1c] via-transparent to-transparent" />
+              </>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center opacity-10">
+                <span className="text-[180px] font-black text-cyan-400 leading-none select-none">
+                  {person.initials}
+                </span>
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Thumbnails */}
+      {members.length > 1 && (
+        <div className="flex gap-3 mt-5">
+          {members.map((m, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              className={`relative w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 flex-shrink-0 ${
+                i === active
+                  ? 'border-cyan-400 opacity-100'
+                  : 'border-transparent opacity-40 hover:opacity-70'
+              }`}
+            >
+              {m.photo ? (
+                <Image
+                  src={m.photo}
+                  alt={m.name}
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover grayscale"
+                />
+              ) : (
+                <div className="w-full h-full bg-[#061428] flex items-center justify-center">
+                  <span className="text-cyan-400 text-sm font-bold">{m.initials}</span>
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Team() {
   return (
@@ -38,7 +155,7 @@ export default function Team() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="mb-12"
         >
           <span className="text-xs font-medium tracking-widest uppercase text-cyan-400 mb-4 block">
             The Team
@@ -48,42 +165,15 @@ export default function Team() {
           </h2>
         </motion.div>
 
-        <div className="flex flex-col max-w-2xl mx-auto gap-5 mb-24">
-          {founders.map((person, i) => (
-            <motion.div
-              key={person.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="gradient-border rounded-2xl bg-[#061428] p-8 flex items-start gap-6 hover:bg-[#071830] transition-colors"
-            >
-              {/* Avatar */}
-              <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center flex-shrink-0">
-                <span className="text-cyan-400 text-lg font-bold tracking-wide">
-                  {person.initials}
-                </span>
-              </div>
-
-              <div className="flex flex-col flex-1 min-w-0">
-                <h3 className="text-white font-semibold text-base mb-0.5">{person.name}</h3>
-                <p className="text-cyan-400 text-xs font-medium tracking-widest uppercase mb-3">
-                  {person.role}
-                </p>
-                <p className="text-slate-400 text-sm leading-relaxed mb-4">{person.bio}</p>
-                <a
-                  href={person.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-slate-500 hover:text-cyan-400 transition-colors text-xs w-fit"
-                >
-                  <ExternalLink size={13} />
-                  LinkedIn
-                </a>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="mb-24"
+        >
+          <TeamDisplay members={founders} />
+        </motion.div>
 
         {/* Advisors */}
         <motion.div
@@ -91,61 +181,25 @@ export default function Team() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12"
+          className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-2">
             Advisors
           </h2>
-          <p className="text-slate-400 text-base max-w-lg mx-auto">
+          <p className="text-slate-400 text-base max-w-lg">
             We are assembling a world-class advisory board spanning photonics,
             defense, infrastructure, and deep tech investment.
           </p>
         </motion.div>
 
-        <div className="flex flex-col max-w-2xl mx-auto gap-5">
-          {/* Dr Subhadeep De */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="gradient-border rounded-2xl bg-[#061428] p-8 flex items-start gap-6 hover:bg-[#071830] transition-colors"
-          >
-            <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center flex-shrink-0">
-              <span className="text-cyan-400 text-lg font-bold tracking-wide">SD</span>
-            </div>
-            <div className="flex flex-col flex-1 min-w-0">
-              <h3 className="text-white font-semibold text-base mb-0.5">Dr Subhadeep De</h3>
-              <p className="text-cyan-400 text-xs font-medium tracking-widest uppercase mb-3">Advisor</p>
-              <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                Professor at IUCAA, Pune, with a doctorate from the University of Groningen and postdoctoral research at the Joint Quantum Institute, University of Maryland. A precision measurement physicist specialising in ultra-stable narrow-linewidth lasers, photonic quantum sensors, and trapped-ion technologies — expertise that sits at the core of LaseQ Systems's interrogation hardware.
-              </p>
-              <a
-                href="https://www.linkedin.com/in/subhadeep-de-00718b15"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-slate-500 hover:text-cyan-400 transition-colors text-xs w-fit"
-              >
-                <ExternalLink size={13} />
-                LinkedIn
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Placeholder */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="gradient-border rounded-2xl bg-[#061428] p-8 flex items-center gap-6 opacity-40"
-          >
-            <div className="w-16 h-16 rounded-full border border-cyan-500/20 bg-cyan-500/5 flex items-center justify-center flex-shrink-0">
-              <span className="text-cyan-500/40 text-2xl font-bold">?</span>
-            </div>
-            <p className="text-slate-500 text-sm font-medium">More advisors joining soon</p>
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          <TeamDisplay members={advisors} />
+        </motion.div>
 
       </div>
     </section>

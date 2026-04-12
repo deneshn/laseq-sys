@@ -8,8 +8,7 @@ import DasScene from '@/components/DasScene';
 import Applications from '@/components/Applications';
 import WhyUs from '@/components/WhyUs';
 import Team from '@/components/Team';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
+import Closing from '@/components/Closing';
 
 export default function Home() {
   return (
@@ -25,9 +24,8 @@ export default function Home() {
         <Applications />
         <WhyUs />
         <Team />
-        <Contact />
+        <Closing />
       </main>
-      <Footer />
     </>
   );
 }
