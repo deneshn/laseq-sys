@@ -18,7 +18,7 @@ const founders = [
     name: 'Denesh Nallur Narasimman',
     role: 'Co-Founder',
     initials: 'DN',
-    photo: null,
+    photo: '/denesh.png',
     linkedin: 'https://www.linkedin.com/in/deneshn',
     bio: 'Hardware engineer and business lead, MEng in Robotics (University of Maryland). Specialises in taking unsolved hardware problems from first principles to working prototype, while driving commercial strategy and investor relations.',
   },
