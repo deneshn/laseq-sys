@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
@@ -20,7 +20,7 @@ const founders = [
     initials: 'DN',
     photo: '/denesh.png',
     linkedin: 'https://www.linkedin.com/in/deneshn',
-    bio: 'Hardware engineer and business lead, MEng in Robotics (University of Maryland). Specialises in taking unsolved hardware problems from first principles to working prototype, while driving commercial strategy and investor relations.',
+    bio: 'MEng in Robotics (University of Maryland) and hardware engineer with a track record of taking unsolved sensing and systems problems from first principles to working prototypes. At LaseQ Systems, he leads commercial strategy, investor relations, and product development — bridging deep-tech R&D with real-world deployment.',
   },
   {
     name: 'Dr Tanwee Das De',
@@ -47,17 +47,32 @@ type Member = typeof founders[0];
 
 function TeamDisplay({ members }: { members: Member[] }) {
   const [active, setActive] = useState(0);
+  const paused = useRef(false);
   const person = members[active];
 
+  useEffect(() => {
+    if (members.length <= 1) return;
+    const id = setInterval(() => {
+      if (!paused.current) {
+        setActive(prev => (prev + 1) % members.length);
+      }
+    }, 4000);
+    return () => clearInterval(id);
+  }, [members.length]);
+
   return (
-    <div className="relative min-h-[520px] flex flex-col">
+    <div
+      className="relative min-h-[520px] flex flex-col"
+      onMouseEnter={() => { paused.current = true; }}
+      onMouseLeave={() => { paused.current = false; }}
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={active}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4 }}
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -40 }}
+          transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
           className="flex flex-col md:flex-row items-stretch flex-1 relative overflow-hidden rounded-2xl bg-[#040e1c] min-h-[480px]"
         >
           {/* Left — text */}
@@ -116,7 +131,7 @@ function TeamDisplay({ members }: { members: Member[] }) {
           {members.map((m, i) => (
             <button
               key={i}
-              onClick={() => setActive(i)}
+              onClick={() => { setActive(i); paused.current = false; }}
               className={`relative w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 flex-shrink-0 ${
                 i === active
                   ? 'border-cyan-400 opacity-100'
