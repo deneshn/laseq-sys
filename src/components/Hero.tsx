@@ -122,7 +122,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-xs font-medium tracking-widest uppercase mb-8"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-          Deep Tech · Sensing Technology
+          Advanced Sensing Technologies
         </motion.div>
 
         {/* Headline */}
